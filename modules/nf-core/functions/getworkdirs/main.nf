@@ -16,6 +16,7 @@ def getWorkDirs(ch_to_clean, ch_downstream, print_output) {
         .map { meta, ch_to_clean1, ch_to_clean2, ch_dep ->
             return [ [ meta ], ch_to_clean2, ch_dep ]
         }
+
     def ch_workdirs = ch_double_workdir1.mix(ch_double_workdir2).mix(ch_branch.single_ch)
         // filter to retain work directory
         .map { meta, files_to_clean, dependent_files ->
@@ -32,5 +33,6 @@ def getWorkDirs(ch_to_clean, ch_downstream, print_output) {
     if (print_output) {
         ch_workdirs.view()
     }
+
     return ch_workdirs
 }

@@ -26,5 +26,6 @@ def rmEmptyFastQs(ch_fastqs, print_output) {
     if (print_output) {
         ch_nonempty_fastqs.view()
     }
+
     return ch_nonempty_fastqs
 }

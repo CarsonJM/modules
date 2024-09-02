@@ -12,6 +12,8 @@ on:
         type: choice
         options:
           - "ubuntu-latest"
+          - "self-hosted"
+        default: "ubuntu-latest"
 
 # Cancel if a newer run is started
 concurrency:
@@ -133,7 +135,7 @@ jobs:
           echo ${{ steps.outputs.outputs.subworkflows }}
 
   nf-core-lint-modules:
-    runs-on: ${{ github.event.inputs.runners }}
+    runs-on: ${{ github.event.inputs.runners  || 'ubuntu-latest' }}
     name: nf-core-lint-modules
     needs: [pytest-changes, nf-test-changes]
     if: ${{ (needs.pytest-changes.outputs.modules != '[]') || ( needs.nf-test-changes.outputs.modules != '[]') }}
@@ -180,7 +182,7 @@ jobs:
 
   nf-core-lint-subworkflows:
     runs-on: ubuntu-latest
-    name: nf-core-lint-subworkflows
+    name: nf-core-lint-modules
     needs: [pytest-changes, nf-test-changes]
     if: ${{ (needs.pytest-changes.outputs.subworkflows != '[]') || ( needs.nf-test-changes.outputs.subworkflows != '[]') }}
     strategy:
@@ -217,7 +219,7 @@ jobs:
         run: nf-core subworkflows lint ${{ matrix.tags }}
 
   pytest:
-    runs-on: ${{ github.event.inputs.runners }}
+    runs-on: ${{ github.event.inputs.runners  || 'ubuntu-latest' }}
     name: pytest
     needs: [pytest-changes]
     if: needs.pytest-changes.outputs.tags != '[]'
@@ -483,7 +485,7 @@ jobs:
             !${{ github.workspace }}/.singularity
 
   nf-test:
-    runs-on: ${{ github.event.inputs.runners }}
+    runs-on: ${{ github.event.inputs.runners  || 'ubuntu-latest' }}
     name: nf-test
     needs: [nf-test-changes]
     if: ( needs.nf-test-changes.outputs.paths != '[]' )

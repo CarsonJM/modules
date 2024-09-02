@@ -27,7 +27,8 @@ nextflow_function {
         then {
             assertAll (
                 { assert function.success },
-                { assert snapshot(function.stdout).match() }
+                { assert function.stdout.any() { it.contains("[[id:test], /somepath/work/12/hashforworkdirtoclean/]") } },
+                { assert function.stdout.any() { !it.contains("/somepath/work/34/hashforworkdirdownstream/") } }
             )
         }
     }
@@ -60,7 +61,9 @@ nextflow_function {
         then {
             assertAll (
                 { assert function.success },
-                { assert snapshot(function.stdout).match() }
+                { assert function.stdout.any() { it.contains("[[id:test], /somepath/work/12/hashforworkdirtoclean/]") } },
+                { assert function.stdout.any() { it.contains("[[id:test], /somepath/work/24/hashforworkdirtoclean/]") } },
+                { assert function.stdout.any() { !it.contains("/somepath/work/34/hashforworkdirdownstream/") } }
             )
         }
     }

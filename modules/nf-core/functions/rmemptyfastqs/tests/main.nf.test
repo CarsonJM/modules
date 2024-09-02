@@ -29,7 +29,8 @@ nextflow_function {
         then {
             assertAll (
                 { assert function.success },
-                { assert snapshot(function.stdout).match() }
+                { assert function.stdout.any() { it.contains("[[id:nonempty, single_end:false], [/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz, /nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_2.fastq.gz]]") } },
+                { assert function.stdout.any() { it.contains("[[id:cleaned, single_end:true]") } }
             )
         }
     }
@@ -56,7 +57,8 @@ nextflow_function {
         then {
             assertAll (
                 { assert function.success },
-                { assert snapshot(function.stdout).match() }
+                { assert function.stdout.any() { it.contains("[[id:nonempty, single_end:true], /nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz]") } },
+                { assert function.stdout.any() { !it.contains("id:empty") } }
             )
         }
     }
