@@ -1,0 +1,27 @@
+{
+    "getWorkDirs double": {
+        "content": [
+            [
+                "[[id:test], /somepath/work/12/hashforworkdirtoclean/]",
+                "[[id:test], /somepath/work/24/hashforworkdirtoclean/]"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-02T08:00:08.332845613"
+    },
+    "getWorkDirs single": {
+        "content": [
+            [
+                "[[id:test], /somepath/work/12/hashforworkdirtoclean/]"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-02T08:00:03.219909745"
+    }
+}

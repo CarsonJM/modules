@@ -1,0 +1,67 @@
+nextflow_function {
+
+    name "Test getWorkDirs"
+    script "../main.nf"
+
+    test("getWorkDirs single") {
+        function "getWorkDirs"
+        when {
+            function {
+            """
+            input[0] = Channel.of(
+                [
+                    [ id:'test' ], // meta map
+                    "/somepath/work/12/hashforworkdirtoclean/somefile.txt"
+                ]
+            )
+            input[1] = Channel.of(
+                [
+                    [ id:'test' ], // meta map
+                    "/somepath/work/34/hashforworkdirdownstream/someotherfile.txt"
+                ]
+            )
+            input[2] = true
+            """
+            }
+        }
+        then {
+            assertAll (
+                { assert function.success },
+                { assert snapshot(function.stdout).match() }
+            )
+        }
+    }
+
+    test("getWorkDirs double") {
+        function "getWorkDirs"
+        when {
+            function {
+            """
+            input[0] = Channel.of(
+                [
+                    [ id:'test' ], // meta map
+                    "/somepath/work/12/hashforworkdirtoclean/somefile.txt"
+                ],
+                [
+                    [ id:'test' ], // meta map
+                    "/somepath/work/24/hashforworkdirtoclean/somefile.txt"
+                ]
+            )
+            input[1] = Channel.of(
+                [
+                    [ id:'test' ], // meta map
+                    "/somepath/work/34/hashforworkdirdownstream/someotherfile.txt"
+                ]
+            )
+            input[2] = true
+            """
+            }
+        }
+        then {
+            assertAll (
+                { assert function.success },
+                { assert snapshot(function.stdout).match() }
+            )
+        }
+    }
+}

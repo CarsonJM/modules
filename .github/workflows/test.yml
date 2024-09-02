@@ -12,8 +12,6 @@ on:
         type: choice
         options:
           - "ubuntu-latest"
-          - "self-hosted"
-        default: "self-hosted"
 
 # Cancel if a newer run is started
 concurrency:
@@ -135,7 +133,7 @@ jobs:
           echo ${{ steps.outputs.outputs.subworkflows }}
 
   nf-core-lint-modules:
-    runs-on: ${{ github.event.inputs.runners  || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.runners }}
     name: nf-core-lint-modules
     needs: [pytest-changes, nf-test-changes]
     if: ${{ (needs.pytest-changes.outputs.modules != '[]') || ( needs.nf-test-changes.outputs.modules != '[]') }}
@@ -182,7 +180,7 @@ jobs:
 
   nf-core-lint-subworkflows:
     runs-on: ubuntu-latest
-    name: nf-core-lint-modules
+    name: nf-core-lint-subworkflows
     needs: [pytest-changes, nf-test-changes]
     if: ${{ (needs.pytest-changes.outputs.subworkflows != '[]') || ( needs.nf-test-changes.outputs.subworkflows != '[]') }}
     strategy:
@@ -219,7 +217,7 @@ jobs:
         run: nf-core subworkflows lint ${{ matrix.tags }}
 
   pytest:
-    runs-on: ${{ github.event.inputs.runners  || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.runners }}
     name: pytest
     needs: [pytest-changes]
     if: needs.pytest-changes.outputs.tags != '[]'
@@ -485,7 +483,7 @@ jobs:
             !${{ github.workspace }}/.singularity
 
   nf-test:
-    runs-on: ${{ github.event.inputs.runners  || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.runners }}
     name: nf-test
     needs: [nf-test-changes]
     if: ( needs.nf-test-changes.outputs.paths != '[]' )
@@ -493,7 +491,7 @@ jobs:
       fail-fast: false
       matrix:
         path: ["${{ fromJson(needs.nf-test-changes.outputs.paths) }}"]
-        profile: [conda, docker_self_hosted, singularity]
+        profile: [conda, docker, singularity]
         exclude:
           - path: modules/nf-core/nf-test
           - profile: conda
@@ -707,13 +705,6 @@ jobs:
           SENTIEON_LICSRVR_IP: ${{ secrets.SENTIEON_LICSRVR_IP }}
           SENTIEON_AUTH_MECH: "GitHub Actions - token"
         run: |
-          # use "docker_self_hosted" if it runs on self-hosted runner and matrix.profile=docker
-          if [ "${{ matrix.profile }}" == "docker" ]; then
-            PROFILE="docker_self_hosted"
-          else
-            PROFILE=${{ matrix.profile }}
-          fi
-
           NFT_WORKDIR=~ \
           nf-test test \
             --profile=${{ matrix.profile }} \

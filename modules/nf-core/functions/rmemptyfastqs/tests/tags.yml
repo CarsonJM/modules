@@ -1,0 +1,2 @@
+functions/getworkdirs:
+  - "modules/nf-core/functions/getworkdirs/**"

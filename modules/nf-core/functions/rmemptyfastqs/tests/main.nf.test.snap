@@ -1,0 +1,27 @@
+{
+    "paired end + cleaned.fasta.gz": {
+        "content": [
+            [
+                "[[id:nonempty, single_end:false], [/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz, /nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_2.fastq.gz]]",
+                "[[id:cleaned, single_end:true], /mmfs1/gscratch/pedslabs_hoffman/carsonjm/nf-microbe/modules/assets/test-datasets/genomics/sarscov2/illumina/fastq/cleaned.fastq.gz]"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-02T08:13:09.384239509"
+    },
+    "single end + empty.fastq.gz": {
+        "content": [
+            [
+                "[[id:nonempty, single_end:true], /nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz]"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-02T08:13:15.124346278"
+    }
+}
