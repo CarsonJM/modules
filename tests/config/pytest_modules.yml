@@ -242,9 +242,6 @@ galah:
 gangstr:
   - modules/nf-core/gangstr/**
   - tests/modules/nf-core/gangstr/**
-gappa/examinegraft:
-  - modules/nf-core/gappa/examinegraft/**
-  - tests/modules/nf-core/gappa/examinegraft/**
 gatk/indelrealigner:
   - modules/nf-core/gatk/indelrealigner/**
   - tests/modules/nf-core/gatk/indelrealigner/**
@@ -302,9 +299,6 @@ gem2/gemmappability:
 genescopefk:
   - modules/nf-core/genescopefk/**
   - tests/modules/nf-core/genescopefk/**
-genmap/index:
-  - modules/nf-core/genmap/index/**
-  - tests/modules/nf-core/genmap/index/**
 genmap/map:
   - modules/nf-core/genmap/map/**
   - tests/modules/nf-core/genmap/map/**
@@ -344,9 +338,6 @@ gprofiler2/gost:
 graphmap2/align:
   - modules/nf-core/graphmap2/align/**
   - tests/modules/nf-core/graphmap2/align/**
-graphmap2/index:
-  - modules/nf-core/graphmap2/index/**
-  - tests/modules/nf-core/graphmap2/index/**
 graphtyper/genotype:
   - modules/nf-core/graphtyper/genotype/**
   - tests/modules/nf-core/graphtyper/genotype/**
@@ -377,9 +368,6 @@ gunc/run:
 hapibd:
   - modules/nf-core/hapibd/**
   - tests/modules/nf-core/hapibd/**
-haplocheck:
-  - modules/nf-core/haplocheck/**
-  - tests/modules/nf-core/haplocheck/**
 haplogrep2/classify:
   - modules/nf-core/haplogrep2/classify/**
   - tests/modules/nf-core/haplogrep2/classify/**
@@ -419,9 +407,6 @@ homer/annotatepeaks:
 homer/makeucscfile:
   - modules/nf-core/homer/makeucscfile/**
   - tests/modules/nf-core/homer/makeucscfile/**
-hpsuissero:
-  - modules/nf-core/hpsuissero/**
-  - tests/modules/nf-core/hpsuissero/**
 hypo:
   - modules/nf-core/hypo/**
   - tests/modules/nf-core/hypo/**
@@ -431,9 +416,6 @@ icountmini/metagene:
 icountmini/peaks:
   - modules/nf-core/icountmini/peaks/**
   - tests/modules/nf-core/icountmini/peaks/**
-icountmini/segment:
-  - modules/nf-core/icountmini/segment/**
-  - tests/modules/nf-core/icountmini/segment/**
 icountmini/sigxls:
   - modules/nf-core/icountmini/sigxls/**
   - tests/modules/nf-core/icountmini/sigxls/**
@@ -443,9 +425,6 @@ icountmini/summary:
 idr:
   - modules/nf-core/idr/**
   - tests/modules/nf-core/idr/**
-igv/js:
-  - modules/nf-core/igv/js/**
-  - tests/modules/nf-core/igv/js/**
 ilastik/multicut:
   - modules/nf-core/ilastik/multicut/**
   - tests/modules/nf-core/ilastik/multicut/**
@@ -467,9 +446,6 @@ ismapper:
 ivar/consensus:
   - modules/nf-core/ivar/consensus/**
   - tests/modules/nf-core/ivar/consensus/**
-ivar/trim:
-  - modules/nf-core/ivar/trim/**
-  - tests/modules/nf-core/ivar/trim/**
 ivar/variants:
   - modules/nf-core/ivar/variants/**
   - tests/modules/nf-core/ivar/variants/**
@@ -831,9 +807,6 @@ spring/decompress:
 srst2/srst2:
   - modules/nf-core/srst2/srst2/**
   - tests/modules/nf-core/srst2/srst2/**
-staphopiasccmec:
-  - modules/nf-core/staphopiasccmec/**
-  - tests/modules/nf-core/staphopiasccmec/**
 stecfinder:
   - modules/nf-core/stecfinder/**
   - tests/modules/nf-core/stecfinder/**
