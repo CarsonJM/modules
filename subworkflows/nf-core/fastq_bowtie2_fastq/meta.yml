@@ -16,16 +16,6 @@ input:
         Channel containing FastQ files to be aligned.
         Structure: [ val(meta), [ path(fastq_1), path(fastq_2) ] ]
       pattern: "*.{fastq,fq,fastq.gz,fq.gz}"
-  - igenomes:
-      type: dictionary
-      description: |
-        Dictionary containing dictionary mapping igenomes keys and to values.
-        Structure: igenomes { 'GRCh37' { fasta = 'path/to/fasta', gtf = 'path/to/gtf' } }
-  - igenomes_index:
-      type: string
-      description: |
-        String matching igenomes key to use for downloading bowtie2 index.
-        Structure: "GRCh37"
   - fasta_gz:
       type: file
       description: |

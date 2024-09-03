@@ -1,99 +1,4 @@
 {
-    "igenomes input": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test1",
-                            "single_end": false
-                        },
-                        [
-                            "test1.unmapped_1.fastq.gz:md5,4161df271f9bfcd25d5845a1e220dbec",
-                            "test1.unmapped_2.fastq.gz:md5,2ebae722295ea66d84075a3b042e2b42"
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "test2",
-                            "single_end": false
-                        },
-                        [
-                            "test2.unmapped_1.fastq.gz:md5,4161df271f9bfcd25d5845a1e220dbec",
-                            "test2.unmapped_2.fastq.gz:md5,2ebae722295ea66d84075a3b042e2b42"
-                        ]
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test1",
-                            "single_end": false
-                        },
-                        "test1.bowtie2.log:md5,293b613add3f935f5e332524fffbe805"
-                    ],
-                    [
-                        {
-                            "id": "test2",
-                            "single_end": false
-                        },
-                        "test2.bowtie2.log:md5,293b613add3f935f5e332524fffbe805"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,3cd53b0efbbc7e2ce5673c1c97f046ee",
-                    "versions.yml:md5,3cd53b0efbbc7e2ce5673c1c97f046ee"
-                ],
-                "bt2_log": [
-                    [
-                        {
-                            "id": "test1",
-                            "single_end": false
-                        },
-                        "test1.bowtie2.log:md5,293b613add3f935f5e332524fffbe805"
-                    ],
-                    [
-                        {
-                            "id": "test2",
-                            "single_end": false
-                        },
-                        "test2.bowtie2.log:md5,293b613add3f935f5e332524fffbe805"
-                    ]
-                ],
-                "fastq_gz": [
-                    [
-                        {
-                            "id": "test1",
-                            "single_end": false
-                        },
-                        [
-                            "test1.unmapped_1.fastq.gz:md5,4161df271f9bfcd25d5845a1e220dbec",
-                            "test1.unmapped_2.fastq.gz:md5,2ebae722295ea66d84075a3b042e2b42"
-                        ]
-                    ],
-                    [
-                        {
-                            "id": "test2",
-                            "single_end": false
-                        },
-                        [
-                            "test2.unmapped_1.fastq.gz:md5,4161df271f9bfcd25d5845a1e220dbec",
-                            "test2.unmapped_2.fastq.gz:md5,2ebae722295ea66d84075a3b042e2b42"
-                        ]
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,3cd53b0efbbc7e2ce5673c1c97f046ee",
-                    "versions.yml:md5,3cd53b0efbbc7e2ce5673c1c97f046ee"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
-        },
-        "timestamp": "2024-09-02T11:38:48.959029148"
-    },
     "fasta input": {
         "content": [
             {
@@ -189,7 +94,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-02T09:25:02.252528442"
+        "timestamp": "2024-09-02T15:27:45.068939413"
     },
     "bt2 index input": {
         "content": [
@@ -284,6 +189,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-02T09:25:13.527344193"
+        "timestamp": "2024-09-02T15:27:56.116991683"
     }
 }

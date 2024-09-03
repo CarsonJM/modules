@@ -2,15 +2,18 @@
 name: "fastq_readpreprocessing_fastq"
 description: Run read preprocessing on FastQ files.
 keywords:
-  - align
+  - preprocess
+  - quality
+  - fastp
   - bowtie2
-  - host
-  - reference
+  - merge
+  - cat
 components:
   - cat/fastq
   - fastp
   - fastq_bowtie2_fastq
   - fastqc
+  - utils_nfmicrobe_functions
   - getworkdirs
   - rmemptyfastqs
 input:

@@ -1,7 +1,3 @@
-// Import functions
-include { getWorkDirs   } from '../../../modules/nf-core/functions/getworkdirs/main'
-include { rmEmptyFastQs } from '../../../modules/nf-core/functions/rmemptyfastqs/main'
-
 // Import modules
 include { CAT_FASTQ                     } from '../../../modules/nf-core/cat/fastq/main'
 include { FASTP                         } from '../../../modules/nf-core/fastp/main'
@@ -9,18 +5,17 @@ include { FASTQC as FASTQC_RAW          } from '../../../modules/nf-core/fastqc/
 include { FASTQC as FASTQC_PREPROCESSED } from '../../../modules/nf-core/fastqc/main'
 
 // Import subworkflows
-include { FASTQ_BOWTIE2_FASTQ   } from '../../../subworkflows/nf-core/fastq_bowtie2_fastq/main'
+include { getWorkDirs; rmEmptyFastQs    } from '../utils_nfmicrobe_functions/main'
+include { FASTQ_BOWTIE2_FASTQ           } from '../fastq_bowtie2_fastq/main'
 
 // Run workflow
 workflow FASTQ_READPREPROCESSING_FASTQ {
 
     take:
-    raw_fastq_gz         // channel: [ [ meta.id, meta.single_end, meta.run ], [ reads_1.fastq.gz, reads_2.fastq.gz ] ] (MANDATORY)
+    raw_fastq_gz            // channel: [ [ meta.id, meta.single_end, meta.run ], [ reads_1.fastq.gz, reads_2.fastq.gz ] ] (MANDATORY)
     run_fastp               // val: false
     perform_run_merging     // val: false
     run_bowtie2_host_removal// val: false
-    igenomes                // val: igenomes genome paths (OPTIONAL)
-    igenomes_index          // val: igenomes index (OPTIONAL)
     host_fasta_gz           // val: /path/to/fasta.fasta.gz (OPTIONAL)
     host_bt2_index          // val: /path/to/host_index.bt2 (OPTIONAL)
 
@@ -118,8 +113,6 @@ workflow FASTQ_READPREPROCESSING_FASTQ {
         //
         FASTQ_BOWTIE2_FASTQ(
             ch_runmerged_fastq_gz,
-            igenomes,
-            igenomes_index,
             host_fasta_gz,
             host_bt2_index
         )

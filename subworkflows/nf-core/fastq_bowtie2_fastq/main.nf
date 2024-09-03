@@ -7,8 +7,6 @@ workflow FASTQ_BOWTIE2_FASTQ {
 
     take:
     fastq_gz        // channel: [ [ meta ], [ reads_1.fastq.gz, reads_2.fastq.gz ] ] (MANDATORY)
-    igenomes        // dict: igenomes genome paths (OPTIONAL)
-    igenomes_index  // val: igenomes host (OPTIONAL)
     fasta_gz        // val: /path/to/fasta.fasta.gz (OPTIONAL)
     bt2_index       // val: /path/to/host_index.bt2 (OPTIONAL)
 
@@ -16,14 +14,7 @@ workflow FASTQ_BOWTIE2_FASTQ {
     ch_versions = Channel.empty()
 
     // prepare fasta and bowtie2 index
-    if (igenomes_index) {
-        ch_bowtie2_fasta    = Channel.value(
-            [ [ id:'bowtie2_fasta' ], file(igenomes[igenomes_index].fasta, checkIfExists: true) ]
-        )
-        ch_bowtie2_index    = Channel.value(
-            [ [ id:'bowtie2_index' ], file(igenomes[igenomes_index].bowtie2, checkIfExists: true) ]
-        )
-    } else if (bt2_index) {
+    if (fasta_gz && bt2_index) {
         ch_bowtie2_fasta    = Channel.value(
             [ [ id:'bowtie2_fasta' ], file(fasta_gz, checkIfExists: true) ]
         )
