@@ -1,0 +1,2 @@
+megahit/contig2gfa:
+  - "modules/nf-core/megahit/contig2gfa/**"

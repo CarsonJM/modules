@@ -1,41 +1,34 @@
 {
-    "contigs.fasta.gz & coverage.tsv & viral_contigs & bam": {
+    "fasta.gz & coverage.tsv & viral_contigs & bam": {
         "content": [
             [
                 [
                     {
                         "id": "test"
                     },
-                    "COBRA_category_i_self_circular.fasta.gz:md5,dc0260e8e9e95022109e4c812b9ce636"
+                    "test_COBRA_extended.fasta.gz:md5,3ee264adad01d595157f023506a68248"
                 ]
             ],
+            "test.cobra.log",
             [
                 [
                     {
                         "id": "test"
                     },
-                    "COBRA_joining_summary.txt:md5,d5290bf8832431556801bd83cddb2aa9"
+                    "test_COBRA_joining_summary.txt:md5,fc51a413c8765bc59954f9a359e7a0f2"
                 ]
             ],
             [
                 "versions.yml:md5,6830d6d3da149b4eebd6e66f2346ec92"
-            ],
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "COBRA_category_i_self_circular.fasta.gz:md5,dc0260e8e9e95022109e4c812b9ce636"
-                ]
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-03-22T17:27:48.873319956"
+        "timestamp": "2024-09-09T06:26:17.973425888"
     },
-    "contigs.fasta.gz & coverage.tsv & viral_contigs & bam - stub": {
+    "stub": {
         "content": [
             {
                 "0": [
@@ -43,7 +36,7 @@
                         {
                             "id": "test"
                         },
-                        "COBRA_category_i_self_circular.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_COBRA_extended.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -51,7 +44,7 @@
                         {
                             "id": "test"
                         },
-                        "COBRA_category_ii-a_extended_circular_unique.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_COBRA_joining_summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -59,82 +52,18 @@
                         {
                             "id": "test"
                         },
-                        "COBRA_category_ii-b_extended_partial_unique.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test.cobra.log:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_category_ii-c_extended_failed.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "4": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_category_iii_orphan_end.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_all_assemblies.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_joining_summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "log:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "8": [
                     "versions.yml:md5,6830d6d3da149b4eebd6e66f2346ec92"
                 ],
-                "all_cobra_assemblies": [
+                "fasta": [
                     [
                         {
                             "id": "test"
                         },
-                        "COBRA_all_assemblies.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "extended_circular": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_category_ii-a_extended_circular_unique.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "extended_failed": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_category_ii-c_extended_failed.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "extended_partial": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_category_ii-b_extended_partial_unique.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_COBRA_extended.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "joining_summary": [
@@ -142,7 +71,7 @@
                         {
                             "id": "test"
                         },
-                        "COBRA_joining_summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_COBRA_joining_summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "log": [
@@ -150,23 +79,7 @@
                         {
                             "id": "test"
                         },
-                        "log:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "orphan_end": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_category_iii_orphan_end.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "self_circular": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "COBRA_category_i_self_circular.fasta.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test.cobra.log:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -175,9 +88,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-03-22T16:12:57.980365305"
+        "timestamp": "2024-09-04T08:12:21.739882401"
     }
 }

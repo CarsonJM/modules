@@ -1,5 +1,5 @@
 process COBRAMETA {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
@@ -17,37 +17,50 @@ process COBRAMETA {
     val maxk
 
     output:
-    tuple val(meta), path("${prefix}/COBRA_category_i_self_circular.fasta.gz")                  , emit: self_circular       , optional: true
-    tuple val(meta), path("${prefix}/COBRA_category_ii-a_extended_circular_unique.fasta.gz")    , emit: extended_circular   , optional: true
-    tuple val(meta), path("${prefix}/COBRA_category_ii-b_extended_partial_unique.fasta.gz")     , emit: extended_partial    , optional: true
-    tuple val(meta), path("${prefix}/COBRA_category_ii-c_extended_failed.fasta.gz")             , emit: extended_failed     , optional: true
-    tuple val(meta), path("${prefix}/COBRA_category_iii_orphan_end.fasta.gz")                   , emit: orphan_end          , optional: true
-    tuple val(meta), path("${prefix}/COBRA_all_assemblies.fasta.gz")                            , emit: all_cobra_assemblies, optional: true
-    tuple val(meta), path("${prefix}/COBRA_joining_summary.txt")                                , emit: joining_summary
-    tuple val(meta), path("${prefix}/log")                                                      , emit: log
-    path "versions.yml"                                                                         , emit: versions
+    tuple val(meta), path("${prefix}_COBRA_extended.fasta.gz")      , optional: true    , emit: fasta
+    tuple val(meta), path("${prefix}_COBRA_joining_summary.txt")    , optional: true    , emit: joining_summary
+    tuple val(meta), path("${prefix}.cobra.log")                                        , emit: log
+    path "versions.yml"                                                                 , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
+    def is_compressed = fasta.getExtension() == "gz" ? true : false
+    def fasta_name = is_compressed ? fasta.getBaseName() : fasta
     prefix = task.ext.prefix ?: "${meta.id}"
     """
+    if [ "${is_compressed}" == "true" ]; then
+        gzip -c -d ${fasta} > ${fasta_name}
+    fi
+
+    # reformat coverage/virus files to remove header
+    tail ${query} -n +2 | awk '{print \$1}' > ${prefix}_queries.txt
+    tail ${coverage} -n +2 > ${prefix}_cobra_coverage.txt
+
     cobra-meta \\
-        --fasta ${fasta} \\
-        --coverage ${coverage} \\
-        --query ${query} \\
+        --fasta ${fasta_name} \\
+        --coverage ${prefix}_cobra_coverage.txt \\
+        --query ${prefix}_queries.txt \\
         --mapping ${bam} \\
         --assembler ${assembler} \\
         --mink ${mink} \\
         --maxk ${maxk} \\
         --threads ${task.cpus} \\
         --output ${prefix} \\
-        $args
+        ${args}
 
-    gzip ${prefix}/*.fasta
-    cat ${prefix}/*fasta.gz > ${prefix}/COBRA_all_assemblies.fasta.gz
+    mv ${prefix}/log ${prefix}.cobra.log
+
+    if [ -f ${prefix}/COBRA_category_ii-a_extended_circular_unique.fasta ]; then
+        cat ${prefix}/COBRA_category_ii-a_extended_circular_unique.fasta ${prefix}/COBRA_category_ii-b_extended_partial_unique.fasta > ${prefix}_COBRA_extended.fasta
+        gzip ${prefix}_COBRA_extended.fasta
+        mv ${prefix}/COBRA_joining_summary.txt ${prefix}_COBRA_joining_summary.txt
+    else
+        echo "" | gzip > ${prefix}_COBRA_extended.fasta.gz
+        touch ${prefix}_COBRA_joining_summary.txt
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -57,17 +70,13 @@ process COBRAMETA {
 
     stub:
     def args = task.ext.args ?: ''
+    def is_compressed = fasta.getExtension() == "gz" ? true : false
+    def fasta_name = is_compressed ? fasta.getBaseName() : fasta
     prefix = task.ext.prefix ?: "${meta.id}"
     """
-    mkdir ${prefix}
-    echo "" | gzip > ${prefix}/COBRA_all_assemblies.fasta.gz
-    echo "" | gzip > ${prefix}/COBRA_category_i_self_circular.fasta.gz
-    echo "" | gzip > ${prefix}/COBRA_category_ii-a_extended_circular_unique.fasta.gz
-    echo "" | gzip > ${prefix}/COBRA_category_ii-b_extended_partial_unique.fasta.gz
-    echo "" | gzip > ${prefix}/COBRA_category_ii-c_extended_failed.fasta.gz
-    echo "" | gzip > ${prefix}/COBRA_category_iii_orphan_end.fasta.gz
-    touch ${prefix}/COBRA_joining_summary.txt
-    touch ${prefix}/log
+    echo "" | gzip > ${prefix}_COBRA_extended.fasta.gz
+    touch ${prefix}_COBRA_joining_summary.txt
+    touch ${prefix}.cobra.log
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

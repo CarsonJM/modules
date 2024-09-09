@@ -1,0 +1,53 @@
+name: megahit_contig2gfa
+description: Convert megahit assemblies into GFA assembly graph format.
+keywords:
+  - megahit
+  - denovo
+  - assembly
+  - debruijn
+  - metagenomics
+  - graph
+tools:
+  - megahit:
+      description: "An ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph"
+      homepage: https://github.com/voutcn/megahit
+      documentation: https://github.com/voutcn/megahit
+      tool_dev_url: https://github.com/voutcn/megahit
+      doi: "10.1093/bioinformatics/btv033"
+      licence: ["GPL v3"]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information and input single, or paired-end FASTA/FASTQ files (optionally decompressed)
+        e.g. [ id:'test', single_end:false ]
+  - megahit_contigs:
+      type: file
+      description: |
+        FastA file containing contigs assembled by megahit.
+      pattern: "*.{fa,fas,fasta,fna,fa.gz,fas.gz,fasta.gz,fna.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', single_end:false ]
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - fastg:
+      type: file
+      description: Assembly graph in FastG format.
+      pattern: "*.gfa.gz"
+  - gfa:
+      type: file
+      description: Assembly graph in GFA format.
+      pattern: "*.gfa.gz"
+authors:
+  - "@jfy133"
+maintainers:
+  - "@jfy133"
+  - "@CarsonJM"

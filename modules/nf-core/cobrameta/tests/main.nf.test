@@ -7,132 +7,75 @@ nextflow_process {
     tag "modules"
     tag "modules_nfcore"
     tag "cobrameta"
-    tag "gunzip"
 
-    setup {
-        run("GUNZIP") {
-            script "../../gunzip/main.nf"
-            process {
-                """
-                input[0] = Channel.of (
-                    [
-                        [ id:'test' ],
-                        file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/fasta/test1.contigs.fa.gz', checkIfExists: true)
-                    ]
-                )
-                """
-            }
-        }
-    }
 
-    test("contigs.fasta.gz & coverage.tsv & viral_contigs & bam") {
-
-        config "./nextflow.config"
-
+    test("fasta.gz & coverage.tsv & viral_contigs & bam") {
         when {
-            params {
-                assembler   = 'metaspades'
-                mink        = 27
-                maxk        = 127
-            }
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = Channel.of (
-                    [
-                        [ id:'test'],
-                        [
-                            file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/coverage/test1_contigs.coverage.stats.txt', checkIfExists: true)
-                        ]
-                    ]
-                )
-                input[2] = Channel.of (
-                    [
-                        [ id:'test'],
-                        [
-                            file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/tsv/test1_contigs_ids.tsv', checkIfExists: true)
-                        ]
-                    ]
-                )
-                input[3] = Channel.of (
-                    [
-                        [ id:'test'],
-                        [
-                            file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/bam/test1_contigs.sorted.bam', checkIfExists: true)
-                        ]
-                    ]
-                )
-                input[4] = params.assembler
-                input[5] = params.mink
-                input[6] = params.maxk
+                input[0] = [
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/fasta/test1.contigs.fa.gz', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id:'test'],
+                    file("${projectDir}/assets/test-datasets/genomics/prokaryotes/bacteroides_fragilis/text/test1_contig_coverage.tsv", checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'test'],
+                    file("${projectDir}/assets/test-datasets/genomics/prokaryotes/bacteroides_fragilis/text/test1_contig_names.tsv", checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/bam/test1_contigs.sorted.bam', checkIfExists: true)
+                ]
+                input[4] = 'megahit'
+                input[5] = 21
+                input[6] = 141
                 """
             }
         }
-
         then {
             assertAll (
                 { assert process.success },
                 { assert snapshot(
-                    process.out.self_circular,
+                    process.out.fasta,
+                    file(process.out.log[0][1]).name,
                     process.out.joining_summary,
-                    process.out.versions,
-                    process.out.self_circular,
+                    process.out.versions
                     ).match()
-                },
-                { assert file(process.out.log.get(0).get(1)).exists() },
-                { assert file(process.out.orphan_end.get(0).get(1)).exists() },
-                { assert file(process.out.extended_circular.get(0).get(1)).exists() },
-                { assert file(process.out.extended_failed.get(0).get(1)).exists() },
-                { assert file(process.out.extended_partial.get(0).get(1)).exists() },
-                { assert file(process.out.all_cobra_assemblies.get(0).get(1)).exists() }
+                }
             )
         }
     }
 
-    test("contigs.fasta.gz & coverage.tsv & viral_contigs & bam - stub") {
-
+    test("stub") {
         options "-stub"
-
         when {
-            params {
-                assembler   = 'metaspades'
-                mink        = 27
-                maxk        = 127
-            }
             process {
                 """
-                input[0] = GUNZIP.out.gunzip
-                input[1] = Channel.of (
-                    [
-                        [ id:'test'],
-                        [
-                            file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/coverage/test1_contigs.coverage.stats.txt', checkIfExists: true)
-                        ]
-                    ]
-                )
-                input[2] = Channel.of (
-                    [
-                        [ id:'test'],
-                        [
-                            file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/tsv/test1_contigs_ids.tsv', checkIfExists: true)
-                        ]
-                    ]
-                )
-                input[3] = Channel.of (
-                    [
-                        [ id:'test'],
-                        [
-                            file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/bam/test1_contigs.sorted.bam', checkIfExists: true)
-                        ]
-                    ]
-                )
-                input[4] = params.assembler
-                input[5] = params.mink
-                input[6] = params.maxk
+                input[0] = [
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/fasta/test1.contigs.fa.gz', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id:'test'],
+                    file("${projectDir}/assets/test-datasets/genomics/prokaryotes/bacteroides_fragilis/text/test1_contig_coverage.tsv", checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'test'],
+                    file("${projectDir}/assets/test-datasets/genomics/prokaryotes/bacteroides_fragilis/text/test1_contig_names.tsv", checkIfExists: true)
+                ]
+                input[3] = [
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/prokaryotes/bacteroides_fragilis/illumina/bam/test1_contigs.sorted.bam', checkIfExists: true)
+                ]
+                input[4] = 'megahit'
+                input[5] = 21
+                input[6] = 141
                 """
             }
         }
-
         then {
             assertAll(
                 { assert process.success },

@@ -66,50 +66,21 @@ output:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
-  - extended_assemblies:
+  - fasta:
       type: file
       description: |
-        Gzipped FASTA file containing query contigs that are already circular
-      pattern: "${prefix}/COBRA_category_i_self_circular.fasta.gz"
-  - extended_circular:
-      type: file
-      description: |
-        Gzipped FASTA file containing query contigs that were joined and extended
-        into a circular genome
-      pattern: "${prefix}/COBRA_category_ii-a_extended_circular_unique.fasta.gz"
-  - extended_partial:
-      type: file
-      description: |
-        Gzipped FASTA file containing query contigs were joined and extended, but
-        not into circular sequences
-      pattern: "${prefix}/COBRA_category_ii-b_extended_partial_unique.fasta.gz"
-  - extended_failed:
-      type: file
-      description: |
-        Gzipped FASTA file containing query contigs that could not be extended due
-        to COBRA rules
-      pattern: "${prefix}/COBRA_category_ii-c_extended_failed.fasta.gz"
-  - orphan_end:
-      type: file
-      description: |
-        Gzipped FASTA file containing query contigs that do not shared the
-        "expected overlap length" with other contigs
-      pattern: "${prefix}/COBRA_category_iii_orphan_end.fasta.gz"
-  - all_assemblies:
-      type: file
-      description: |
-        Gzipped FASTA file containing all FASTA outputs combined into one file
-      pattern: "${prefix}/COBRA_all_assemblies.fasta.gz"
+        Gzipped FastA file containing query contigs that were extended.
+      pattern: "*_COBRA_extended.fasta"
   - joining_summary:
       type: file
       description: |
         TSV file containing information regarding COBRA's extension results
-      pattern: "${prefix}/COBRA_joining_summary.txt"
+      pattern: "*_COBRA_joining_summary.txt"
   - log:
       type: file
       description: |
-        Log file containing the contents of each processing
-      pattern: "${prefix}/log"
+        Log file containing the stdout of COBRA
+      pattern: "*.cobra.log"
   - versions:
       type: file
       description: File containing software versions

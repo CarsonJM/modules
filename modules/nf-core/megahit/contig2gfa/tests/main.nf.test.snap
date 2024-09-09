@@ -1,0 +1,108 @@
+{
+    "sarcov2 - fasta": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.graph.fastg.gz:md5,c0d204a1f25ad863d2a16b6327625038"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.gfa.gz:md5,617ff12a7a83eebe21ce38eb199309d5"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,a2b4a72a5fcf97309f295e2a8585c356"
+                ],
+                "fastg": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.graph.fastg.gz:md5,c0d204a1f25ad863d2a16b6327625038"
+                    ]
+                ],
+                "gfa": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.gfa.gz:md5,617ff12a7a83eebe21ce38eb199309d5"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,a2b4a72a5fcf97309f295e2a8585c356"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-04T13:42:27.376982934"
+    },
+    "stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.graph.fastg.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.gfa.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,a2b4a72a5fcf97309f295e2a8585c356"
+                ],
+                "fastg": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.graph.fastg.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "gfa": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": true
+                        },
+                        "test.gfa.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,a2b4a72a5fcf97309f295e2a8585c356"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-04T13:42:36.239344606"
+    }
+}
