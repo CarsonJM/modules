@@ -18,7 +18,7 @@ process SPADES {
     tuple val(meta), path('*.transcripts.fa.gz')  , optional:true, emit: transcripts
     tuple val(meta), path('*.gene_clusters.fa.gz'), optional:true, emit: gene_clusters
     tuple val(meta), path('*.assembly.gfa.gz')    , optional:true, emit: gfa
-    tuple val(meta), path('warnings.log')         , optional:true, emit: warnings
+    tuple val(meta), path('*.warnings.log')         , optional:true, emit: warnings
     tuple val(meta), path('*.spades.log')         , emit: log
     tuple val(meta), env(min_kmer)                , emit: min_kmer
     tuple val(meta), env(max_kmer)                , emit: max_kmer
@@ -68,6 +68,11 @@ process SPADES {
         gzip -n ${prefix}.gene_clusters.fa
     fi
 
+
+    if [ -f warnings.log ]; then
+        mv warnings.log ${prefix}.warnings.log
+    fi
+
     # identify min/max kmer size
     kmer_string=\$(grep "K values to be used: \\[" ${prefix}.spades.log | sed 's/.*K values to be used: \\[//; s/\\].*//')
     kmer_array=(\${kmer_string//,/ })
@@ -98,7 +103,7 @@ process SPADES {
     echo "" | gzip > ${prefix}.gene_clusters.fa.gz
     echo "" | gzip > ${prefix}.assembly.gfa.gz
     touch ${prefix}.spades.log
-    touch warnings.log
+    touch ${prefix}.warnings.log
     min_kmer=21
     max_kmer=51
 
