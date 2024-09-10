@@ -7,20 +7,18 @@ process CHECKV_DOWNLOADDATABASE {
         'biocontainers/checkv:1.0.1--pyhdfd78af_0' }"
 
     output:
-    path "${prefix}/*"         , emit: checkv_db
-    path "versions.yml"        , emit: versions
+    path "checkv_db/*"  , emit: checkv_db
+    path "versions.yml" , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
-    prefix = task.ext.prefix ?: "checkv_db"
-
     """
     checkv download_database \\
-        $args \\
-        ./$prefix/
+        ${args} \\
+        ./checkv_db
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

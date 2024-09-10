@@ -1,5 +1,5 @@
 process CHECKV_ENDTOEND {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
@@ -12,12 +12,12 @@ process CHECKV_ENDTOEND {
     path db
 
     output:
-    tuple val(meta), path ("${prefix}/quality_summary.tsv") , emit: quality_summary
-    tuple val(meta), path ("${prefix}/completeness.tsv")    , emit: completeness
-    tuple val(meta), path ("${prefix}/contamination.tsv")   , emit: contamination
-    tuple val(meta), path ("${prefix}/complete_genomes.tsv"), emit: complete_genomes
-    tuple val(meta), path ("${prefix}/proviruses.fna")      , emit: proviruses
-    tuple val(meta), path ("${prefix}/viruses.fna")         , emit: viruses
+    tuple val(meta), path ("${prefix}_quality_summary.tsv") , emit: quality_summary
+    tuple val(meta), path ("${prefix}_completeness.tsv")    , emit: completeness
+    tuple val(meta), path ("${prefix}_contamination.tsv")   , emit: contamination
+    tuple val(meta), path ("${prefix}_complete_genomes.tsv"), emit: complete_genomes
+    tuple val(meta), path ("${prefix}_proviruses.fna.gz")   , emit: proviruses
+    tuple val(meta), path ("${prefix}_viruses.fna.gz")      , emit: viruses
     path "versions.yml"                                     , emit: versions
 
     when:
@@ -30,11 +30,20 @@ process CHECKV_ENDTOEND {
     """
     checkv \\
         end_to_end \\
-        $args \\
-        -t $task.cpus \\
-        -d $db \\
-        $fasta \\
-        $prefix
+        ${args} \\
+        -t ${task.cpus} \\
+        -d ${db} \\
+        ${fasta} \\
+        ${prefix}
+
+    # rename files by adding prefix
+    mv ${prefix}/quality_summary.tsv ${prefix}_quality_summary.tsv
+    mv ${prefix}/completeness.tsv ${prefix}_completeness.tsv
+    mv ${prefix}/contamination.tsv ${prefix}_contamination.tsv
+    mv ${prefix}/complete_genomes.tsv ${prefix}_complete_genomes.tsv
+    gzip -c ${prefix}/proviruses.fna > ${prefix}_proviruses.fna.gz
+    gzip -c ${prefix}/viruses.fna > ${prefix}_viruses.fna.gz
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -47,13 +56,12 @@ process CHECKV_ENDTOEND {
     prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    mkdir -p ${prefix}
-    touch ${prefix}/quality_summary.tsv
-    touch ${prefix}/completeness.tsv
-    touch ${prefix}/contamination.tsv
-    touch ${prefix}/complete_genomes.tsv
-    touch ${prefix}/proviruses.fna
-    touch ${prefix}/viruses.fna
+    touch ${prefix}_quality_summary.tsv
+    touch ${prefix}_completeness.tsv
+    touch ${prefix}_contamination.tsv
+    touch ${prefix}_complete_genomes.tsv
+    echo "" | gzip > ${prefix}_proviruses.fna.gz
+    echo "" | gzip > ${prefix}_viruses.fna.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
