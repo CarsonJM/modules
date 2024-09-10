@@ -1,49 +1,28 @@
-name: "genomad_endtoend"
-description: Identify mobile genetic elements present in genomic assemblies
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "fasta_genomad_fastatsv"
+description: Predict and annotate virus/plasmid sequences.
 keywords:
-  - metagenomics
-  - genomad
-  - database
-  - download
-  - phage
   - virus
   - plasmid
-tools:
-  - "genomad":
-      description: "Identification of mobile genetic elements"
-      homepage: https://portal.nersc.gov/genomad/
-      documentation: https://portal.nersc.gov/genomad/
-      tool_dev_url: https://github.com/apcamargo/genomad/
-      doi: 10.1101/2023.03.05.531206
-      licence: ["Lawrence Berkeley National Labs BSD variant license"]
-input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. [ id:'test', single_end:false ]
-  - fasta:
-      type: file
-      description: FASTA file containing contigs/scaffolds/chromosomes
-      pattern: "*.{fasta,fna,fa}"
-  - genomad_db:
-      type: directory
-      description: Directory pointing to geNomad database
-output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. [ id:'test', single_end:false ]
+  - prediction
+  - genomad
+components:
+  - genomad/download
+  - genomad/endtoend
 
+input:
+  - fasta_gz:
+      type: file
+      description: |
+        The input channel containing the FastA files
+        Structure: [ val(meta), path(fasta.gz) ]
+      pattern: "*.{fasta,fna,fa,fasta.gz,fna.gz,fa.gz}"
+
+output:
   - plasmid_fasta:
       type: file
       description: FASTA file containing predicted plasmid sequences
       pattern: "*_plasmid.fna.gz"
-  - plasmid_genes:
-      type: file
-      description: TSV file containing predicted plasmid genes and their annotations
-      pattern: "*_plasmid_genes.tsv"
   - plasmid_proteins:
       type: file
       description: FASTA file containing predicted plasmid protein sequences
@@ -56,10 +35,6 @@ output:
       type: file
       description: FASTA file containing predicted virus sequences
       pattern: "*_virus.fna.gz"
-  - virus_genes:
-      type: file
-      description: TSV file containing predicted virus genes and their annotations
-      pattern: "*_virus_genes.tsv"
   - virus_proteins:
       type: file
       description: FASTA file containing predicted virus protein sequences
@@ -72,10 +47,6 @@ output:
       type: file
       description: FAA file containing predicted protein sequences
       pattern: "*_proteins.faa.gz"
-  - provirus:
-      type: file
-      description: Detailed output of each provirus identified by geNomad's find_proviruses module
-      pattern: "*_provirus.tsv"
   - genes:
       type: file
       description: Detailed output of geNomad's marker gene classification.
@@ -101,4 +72,3 @@ authors:
   - "@CarsonJM"
 maintainers:
   - "@CarsonJM"
-  - "@gallvp"

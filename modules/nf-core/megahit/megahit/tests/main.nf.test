@@ -29,6 +29,7 @@ nextflow_process {
                 { assert process.out.kfinal_contigs[0][1].each{path(it).linesGzip.toString().contains(">k")}},
                 { assert snapshot(
                     process.out.contigs,
+                    process.out.gfa,
                     process.out.min_kmer,
                     process.out.max_kmer,
                     process.out.versions,
@@ -62,6 +63,7 @@ nextflow_process {
                 { assert process.out.kfinal_contigs[0][1].each{path(it).linesGzip.toString().contains(">k")}},
                 { assert snapshot(
                     process.out.contigs,
+                    process.out.gfa,
                     process.out.min_kmer,
                     process.out.max_kmer,
                     process.out.versions,

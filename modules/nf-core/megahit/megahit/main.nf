@@ -17,6 +17,7 @@ process MEGAHIT_MEGAHIT {
     tuple val(meta), path("intermediate_contigs/k*.local.fa.gz")        , emit: local_contigs
     tuple val(meta), path("intermediate_contigs/k*.final.contigs.fa.gz"), emit: kfinal_contigs
     tuple val(meta), path("${prefix}.megahit.log")                      , emit: log
+    tuple val(meta), path("${prefix}.gfa.gz")                           , emit: gfa
     tuple val(meta), env(min_kmer)                                      , emit: min_kmer
     tuple val(meta), env(max_kmer)                                      , emit: max_kmer
     path "versions.yml"                                                 , emit: versions
